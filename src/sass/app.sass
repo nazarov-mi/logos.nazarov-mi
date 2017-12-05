@@ -1,0 +1,383 @@
+@charset 'utf-8'
+
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Noto+Serif:400,700&subset=cyrillic')
+@import 'reset.sass'
+@import 'variables.sass'
+@import 'mixins.sass'
+
+html
+	min-width: 300px
+	overflow-x: hidden
+	overflow-y: scroll
+	font-size: $font-size
+	text-rendering: optimizeLegibility
+	text-size-adjust: 100%
+	-moz-osx-font-smoothing: grayscale
+	-webkit-font-smoothing: antialiased
+	-ms-overflow-style: scrollbar
+	-webkit-tap-highlight-color: transparent
+	// -webkit-overflow-scrolling: touch
+
+article,
+aside,
+figure,
+footer,
+header,
+hgroup,
+section
+	display: block
+
+body,
+button,
+input,
+select,
+textarea
+	font-family: $body-family
+
+body
+	color: $text-color
+	font-family: $body-family
+	font-size: 1rem
+	font-weight: $base-weight
+	line-height: 1.24
+
+a
+	color: $link-color
+	cursor: pointer
+	text-decoration: none
+	strong
+		color: currentColor
+
+img
+	height: auto
+	max-width: 100%
+
+input[type="checkbox"],
+input[type="radio"]
+	vertical-align: baseline
+
+small
+	font-size: 0.875em
+
+span
+	font-style: inherit
+	font-weight: inherit
+
+strong
+	color: inherit
+	font-weight: $strong-weight
+
+h1,
+h2,
+h3
+	color: inherit
+	font-family: $family-serif
+	letter-spacing: .03em
+
+h1
+	font-weight: $strong-weight
+	font-size: 2em
+
+h2
+	font-weight: $strong-weight
+	font-size: 1.75em
+
+h3
+	font-size: 1.5em
+
+p,
+blockquote
+	margin-bottom: 1em
+	line-height: 1.875em
+	letter-spacing: .01em
+
+blockquote
+	padding: 1em
+	background-color: #f5f5f5
+	border-radius: .1875em
+	color: $text-color-light
+
+h1,
+h2,
+h3,
+p,
+blockquote
+	&:last-child
+		margin-bottom: 0
+
++mobile
+	html
+		font-size: $font-size-small
+
+
+
+// Layout
+///////////////////////////////////////
+
+.screen
+	transition: filter 1000ms ease-in-out
+	&--lock
+		+overlay
+		position: fixed
+		overflow: hidden
+		filter: blur(5px)
+
+.container
+	+clearfix
+	padding: 4rem 2rem 4rem
+
+.layout
+	position: relative
+	border: 1px solid $accent-color
+
+.description
+	padding-top: 4rem
+
+.header
+	padding: 3.5rem 2rem 0
+	.logo
+		margin: 0 auto
+
+.footer
+	padding: 0 2rem 2rem
+
++tablet
+	.container,
+	.header,
+	.footer
+		padding-left: 3rem
+		padding-right: 3rem
+
++desktop
+	.container,
+	.header,
+	.footer
+		padding-left: 4rem
+		padding-right: 4rem
+
+	.layout
+		position: relative
+		width: 45%
+		max-width: 500px
+		float: left
+		cursor: pointer
+		background-color: #fff
+		transition: opacity 500ms ease-in-out
+		&:hover
+			opacity: .8
+
+	.description
+		width: 55%
+		max-width: 700px
+		float: left
+		padding-top: 0
+		padding-left: 4rem
+
++widescreen
+	.container,
+	.header,
+	.footer
+		padding-left: 6rem
+		padding-right: 6rem
+
+	.container
+		padding-top: 6rem
+
+	.layout
+		width: 40%
+
+	.description
+		width: 50%
+
+	.header
+		position: fixed
+		top: 0
+		left: 0
+		right: 0
+		z-index: 500
+		padding: 3rem 6rem 0
+		.logo
+			margin-right: 0
+
++fullhd
+	.layout
+		width: 35%
+
+	.description
+		width: 40%
+
+
+
+// Typography
+///////////////////////////////////////
+
+h1.title
+	margin-bottom: .75em
+h2.title
+	margin-bottom: .85714em
+h3.title
+	margin-bottom: 1em
+
+.subtitle
+	margin-bottom: 1.4em
+	color: $text-color-lighter
+	font-family: $family-sans-serif
+	font-size: 1em
+	text-transform: uppercase
+
+.title + .subtitle
+	margin-top: -.75em
+
+.content
+	&:not(:last-child)
+		margin-bottom: 2.5rem
+
+	a
+		+transition(color border-color, 250ms)
+		display: inline-block
+		max-width: 100%
+		overflow: hidden
+		border-bottom: 1px solid transparentize($link-color, .5)
+		&:hover
+			color: $text-color
+			border-color: transparentize($text-color, .8)
+			transition: none
+
+.button-container
+	padding-top: .5rem
+	text-align: center
+
++desktop
+	.button-container
+		text-align: left
+
+
+
+// Controls
+///////////////////////////////////////
+
+.button
+	display: block
+	padding: .75em 2.5em
+	background-color: $accent-color
+	border: none
+	border-radius: .1875em
+	color: #fff
+	font-family: $family-sans-serif
+	font-size: 1.125rem
+	font-weight: 400
+	line-height: 1
+	text-transform: uppercase
+	text-decoration: none !important
+	text-align: center
+	white-space: nowrap
+	transition: background-color 400ms ease
+	user-select: none
+	-moz-appearance: none
+	-webkit-appearance: none
+	&:hover
+		background-color: lighten($accent-color, 5%)
+		color: #fff
+		transition: background-color 400ms ease
+
++tablet
+	.button
+		display: inline-block
+
+
+
+// Modal
+///////////////////////////////////////
+
+.modal
+	+overlay
+	+transition(opacity filter, 1000ms, ease-in-out)
+	position: fixed
+	min-height: 100%
+	overflow: hidden
+	z-index: 1000
+	cursor: pointer
+	background-color: #fff
+	text-align: center
+	opacity: 0
+	filter: blur(7px)
+	pointer-events: none
+	&:before
+		content: ' '
+		height: 100%
+		min-height: 100vh
+		margin-left: -.26em
+	&--show
+		position: absolute
+		bottom: initial
+		overflow: auto
+		z-index: 1100
+		opacity: 1
+		filter: blur(0)
+		pointer-events: all
+
+.modal-body
+	cursor: auto
+	text-align: left
+
+.modal:before,
+.modal-body
+	display: inline-block
+	vertical-align: middle
+
+.modal-image
+	display: block	
+
+.modal-box
+	width: 100%
+	max-width: 800px
+	padding: 2rem
+	background-color: #fff
+	border-radius: .1875em
+
++tablet
+	.modal-box
+		padding: 3rem
+
++desktop
+	.modal
+		background-color: rgba(0, 0, 0, .1)
+
+	.modal-body
+		padding: 2rem 0
+
+	.modal-box
+		padding: 4rem
+
+
+
+// Other
+///////////////////////////////////////
+
+.preview-sm
+	display: block
+	width: 100%
+
+.preview-lg
+	display: none
+	width: 100%
+
+.copyright
+	font-size: .8em
+	font-weight: 700
+	letter-spacing: .01em
+
+.logo
+	display: block
+	width: 56px
+	height: 59px
+	& > svg
+		width: 100%
+		fill: $text-color
+
++desktop
+	.preview-sm
+		display: none
+
+	.preview-lg
+		display: block
